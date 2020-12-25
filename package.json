@@ -1,0 +1,33 @@
+{
+  "name": "bfg-schema",
+  "version": "1.0.3",
+  "description": "Provides the link between the template and schematic components. Pattern of data collection of components and their further operation.",
+  "main": "bundle/index.js",
+  "types": "src/index.d.ts",
+  "repository": "https://github.com/bgf-s/schema",
+  "keywords": [
+    "bfg",
+    "xsaven",
+    "script",
+    "schema"
+  ],
+  "author": "bfg",
+  "license": "MIT",
+  "prepublish": "tsc",
+  "scripts": {
+    "prod": "webpack --mode=production",
+    "wp": "cross-env NODE_ENV=development webpack --mode=development --watch"
+  },
+  "dependencies": {
+    "bfg-js": "^1.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0",
+    "ts-loader": "^8.0.8",
+    "typescript": "^4.0.5",
+    "uglify-es": "git://github.com/mishoo/UglifyJS2#harmony",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^5.4.0",
+    "webpack-cli": "^4.1.0"
+  }
+}
