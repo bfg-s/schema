@@ -1,6 +1,6 @@
 {
   "name": "bfg-schema",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Provides the link between the template and schematic components. Pattern of data collection of components and their further operation.",
   "main": "bundle/index.js",
   "types": "src/index.d.ts",
