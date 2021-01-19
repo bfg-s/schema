@@ -3,7 +3,7 @@ export interface anyObject {
     [key: string]: any;
 }
 export interface ruleObject {
-    id?: number | string;
+    id?: string;
     e: string;
     a: anyObject;
     c: anyObject;

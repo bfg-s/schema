@@ -42,7 +42,7 @@ export default class Helpers implements anyObject {
                 data_prop = element.dataset.er;
             }
 
-            let cdata = String(data_prop).split('@');
+            let cdata = String(data_prop).split('\\');
             let e = cdata[0];
             let num = cdata[1];
             let c = (element.dataset.c ? (this as any).json.decode(element.dataset.c) : {});
@@ -59,7 +59,7 @@ export default class Helpers implements anyObject {
             return {
                 id: data_prop, e, a, c,
                 v: (element.dataset.v ? (this as any).json.decode(element.dataset.v) : {}),
-                m: (element.dataset.m ? (this as any).json.decode(element.dataset.m) : []),
+                m: (element.dataset.m ? String(element.dataset.m).split(';') : []),
             };
         }
 

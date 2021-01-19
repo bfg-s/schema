@@ -5,7 +5,7 @@ export interface anyObject {
 }
 
 export interface ruleObject {
-    id?: number|string  // ID
+    id?: string         // ID
     e: string           // Element name
     a: anyObject        // Attributes
     c: anyObject        // Contents
