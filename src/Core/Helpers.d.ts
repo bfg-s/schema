@@ -1,5 +1,6 @@
-import { ruleObject } from "./Schema";
-export default class Helpers {
+import { anyObject, ruleObject } from "./Schema";
+export default class Helpers implements anyObject {
+    asset(path?: string): string;
     is_schema_root_element(element: HTMLElement): boolean;
     is_schema_child_element(element: HTMLElement): boolean;
     is_schema_element(element: HTMLElement): boolean;
