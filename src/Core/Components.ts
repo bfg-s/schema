@@ -34,6 +34,14 @@ export class Components {
         return this;
     }
 
+    new (componentClass: any) {
+
+        if (componentClass && 'name' in componentClass) {
+
+            this.app.components.register(componentClass.name, componentClass)
+        }
+    }
+
     has (name: string) {
 
         return name in this.items;

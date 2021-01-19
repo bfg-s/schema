@@ -5,7 +5,7 @@ export interface anyObject {
 }
 
 export interface ruleObject {
-    id?: number         // ID
+    id?: number|string  // ID
     e: string           // Element name
     a: anyObject        // Attributes
     c: anyObject        // Contents
@@ -22,17 +22,7 @@ export class Schema {
 
     rules (element: HTMLElement): ruleObject {
 
-        let child = element && 'schemaChild' in element.dataset ?
-            this.app.json.decode(atob(element.dataset.schemaChild)) : (
-                element && 'schemaChildId' in element.dataset && element.dataset.schemaChildId in this.app.data ?
-                    this.app.data[element.dataset.schemaChildId] : false
-            );
-
-        return child ? child : (element && 'schema' in element.dataset ?
-            this.app.json.decode(atob(element.dataset.schema)) : (
-                element && 'schemaId' in element.dataset && element.dataset.schemaId in this.app.data ?
-                    this.app.data[element.dataset.schemaId] : {}
-            ));
+        return this.app.get_schema_rules(element);
     }
 
     build (element: HTMLElement, rules: ruleObject) {

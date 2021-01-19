@@ -9,6 +9,7 @@ export declare class Components {
     get(name: string): any;
     all(): anyObject;
     register(name: string, component: any): this;
+    new(componentClass: any): void;
     has(name: string): boolean;
     names(): string[];
 }

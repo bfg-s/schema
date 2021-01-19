@@ -1,6 +1,7 @@
 import {ApplicationContainer, ServiceProvider} from "bfg-js";
 import {Components} from "./Core/Components";
 import {Schema} from "./Core/Schema";
+import Helpers from "./Core/Helpers";
 
 interface anyObject {
     [key: string]: any
@@ -22,6 +23,7 @@ export default class SchemaProvider extends ServiceProvider<ApplicationContainer
             configs[i.name] = content
         });
 
+        this.app.inject(new Helpers());
         this.app.bind('server', configs);
         this.app.bind('head', document.head);
         this.app.bind('body', document.body);
@@ -30,7 +32,7 @@ export default class SchemaProvider extends ServiceProvider<ApplicationContainer
         this.app.singleton('schema', () => new (this.app.schema_class)(this.app));
         this.app.singleton('components', () => new Components(this.app));
         this.app.singleton('elements', () => {
-            return document.querySelectorAll('[data-schema],[data-schema-id]')
+            return document.querySelectorAll('[data-er]')
         });
     }
 
