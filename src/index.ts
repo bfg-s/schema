@@ -1,10 +1,33 @@
-import {ApplicationContainer, ServiceProvider} from "bfg-js";
+//import {ApplicationContainer, ServiceProvider} from "bfg-js";
 import {Components} from "./Core/Components";
 import {Schema} from "./Core/Schema";
 import Helpers from "./Core/Helpers";
 
 interface anyObject {
     [key: string]: any
+}
+
+type ApplicationContainer = import('bfg-js').ApplicationContainer;
+
+export interface ServiceProviderInterface<T> {
+    app: T
+    register? (): void
+    boot? (): void
+}
+
+export interface ServiceProviderConstructor {
+    new <T extends ApplicationContainer>(app?: T): ServiceProvider<T>;
+}
+
+class ServiceProvider<T extends ApplicationContainer> implements ServiceProviderInterface<T> {
+
+    name?: string|Function
+
+    require?: Array<string>
+
+    constructor(
+        public app: T
+    ) {}
 }
 
 export default class SchemaProvider extends ServiceProvider<ApplicationContainer> {
