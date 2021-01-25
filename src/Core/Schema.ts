@@ -56,14 +56,7 @@ export class Schema {
 
         return content.map((element: HTMLElement) => {
 
-            let special = element.dataset && 'schemaChild' in element.dataset ?
-                true : (
-                    element.dataset &&
-                    'schemaChildId' in element.dataset &&
-                    element.dataset.schemaChildId in this.app.data
-                );
-
-            return special ? this.app.schema.build(
+            return this.app.is_schema_element(element) ? this.app.schema.build(
                 element,
                 this.app.schema.rules(
                     element
@@ -75,5 +68,9 @@ export class Schema {
     insert (element: HTMLElement, data: any) {
 
         element.parentNode.replaceChild(data, element);
+    }
+
+    redirected (data: any, component: HTMLElement) {
+        //console.log(data);
     }
 }

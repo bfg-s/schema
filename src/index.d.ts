@@ -1,4 +1,4 @@
-declare type ApplicationContainer = import('bfg-js').ApplicationContainer;
+export declare type ApplicationContainer = import('bfg-js').ApplicationContainer;
 export interface ServiceProviderInterface<T> {
     app: T;
     register?(): void;
@@ -7,7 +7,7 @@ export interface ServiceProviderInterface<T> {
 export interface ServiceProviderConstructor {
     new <T extends ApplicationContainer>(app?: T): ServiceProvider<T>;
 }
-declare class ServiceProvider<T extends ApplicationContainer> implements ServiceProviderInterface<T> {
+export declare class ServiceProvider<T extends ApplicationContainer> implements ServiceProviderInterface<T> {
     app: T;
     name?: string | Function;
     require?: Array<string>;
@@ -19,4 +19,3 @@ export default class SchemaProvider extends ServiceProvider<ApplicationContainer
     boot(): void;
     private build;
 }
-export {};

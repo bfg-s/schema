@@ -17,4 +17,5 @@ export declare class Schema {
     build(element: HTMLElement, rules: ruleObject): HTMLElement;
     apply_content(content: Array<HTMLElement>): any[];
     insert(element: HTMLElement, data: any): void;
+    redirected(data: any, component: HTMLElement): void;
 }

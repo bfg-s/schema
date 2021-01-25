@@ -2,12 +2,14 @@
 import {Components} from "./Core/Components";
 import {Schema} from "./Core/Schema";
 import Helpers from "./Core/Helpers";
+import {Doc} from "./Core/Doc";
+
 
 interface anyObject {
     [key: string]: any
 }
 
-type ApplicationContainer = import('bfg-js').ApplicationContainer;
+export type ApplicationContainer = import('bfg-js').ApplicationContainer;
 
 export interface ServiceProviderInterface<T> {
     app: T
@@ -19,7 +21,7 @@ export interface ServiceProviderConstructor {
     new <T extends ApplicationContainer>(app?: T): ServiceProvider<T>;
 }
 
-class ServiceProvider<T extends ApplicationContainer> implements ServiceProviderInterface<T> {
+export class ServiceProvider<T extends ApplicationContainer> implements ServiceProviderInterface<T> {
 
     name?: string|Function
 
@@ -47,9 +49,8 @@ export default class SchemaProvider extends ServiceProvider<ApplicationContainer
         });
 
         this.app.inject(new Helpers());
+        this.app.bind('doc', new Doc(this.app));
         this.app.bind('server', configs);
-        this.app.bind('head', document.head);
-        this.app.bind('body', document.body);
         this.app.bind('schema_class', Schema);
         this.app.singleton('schema_build', () => this.build());
         this.app.singleton('schema', () => new (this.app.schema_class)(this.app));
@@ -65,6 +66,11 @@ export default class SchemaProvider extends ServiceProvider<ApplicationContainer
 
             this.app.execute('schema_built');
         }
+
+        Object.values(document.querySelectorAll('[data-bfg-call]')).map((e: HTMLElement) => {
+            let json = this.app.json.decode(e.innerText);
+            if (json) { this.app.call(json); }
+        });
     }
 
     private build() {
