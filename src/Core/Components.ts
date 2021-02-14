@@ -51,4 +51,13 @@ export class Components {
 
         return Object.keys(this.items);
     }
+
+    context (context: any, maker: Function|null = null) {
+
+        context.keys().forEach((file: any) => {
+            let obj = context(file).default;
+            let obj_make = typeof maker === 'function' ? maker(obj) : null;
+            this.app.components.new(obj_make ? obj_make : obj);
+        });
+    }
 }

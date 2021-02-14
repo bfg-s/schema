@@ -67,10 +67,26 @@ export class Schema {
 
     insert (element: HTMLElement, data: any) {
 
-        element.parentNode.replaceChild(data, element);
+        if (element.parentNode) {
+
+            element.parentNode.replaceChild(data, element);
+        }
     }
 
-    redirected (data: any, component: HTMLElement) {
-        //console.log(data);
+    content (data: any) {
+
+        let container: string|null = this.app.server.container;
+
+        let component: HTMLElement = container ?
+            document.getElementById(container) : document.body;
+
+        component.append(this.app.str.to_nodes(data));
+    }
+
+    context (context: any, maker: Function|null = null) {
+
+        return this.app.components.context(
+            context, maker
+        );
     }
 }

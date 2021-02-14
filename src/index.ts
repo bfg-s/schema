@@ -49,8 +49,8 @@ export default class SchemaProvider extends ServiceProvider<ApplicationContainer
         });
 
         this.app.inject(new Helpers());
-        this.app.bind('doc', new Doc(this.app));
         this.app.bind('server', configs);
+        this.app.bind('doc', new Doc(this.app));
         this.app.bind('schema_class', Schema);
         this.app.singleton('schema_build', () => this.build());
         this.app.singleton('schema', () => new (this.app.schema_class)(this.app));

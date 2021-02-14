@@ -12,5 +12,6 @@ export declare class Components {
     new(componentClass: any): void;
     has(name: string): boolean;
     names(): string[];
+    context(context: any, maker?: Function | null): void;
 }
 export {};

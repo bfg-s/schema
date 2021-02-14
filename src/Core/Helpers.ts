@@ -56,11 +56,16 @@ export default class Helpers implements anyObject {
                 slotElement.remove();
             });
 
-            return {
+            let rule = {
                 id: data_prop, e, a, c,
                 v: (element.dataset.v ? (this as any).json.decode(element.dataset.v) : {}),
                 m: (element.dataset.m ? String(element.dataset.m).split(';') : []),
             };
+
+            element.removeAttribute('class');
+            element.removeAttributeNS('data', 'dataset');
+
+            return rule;
         }
 
         return null;
